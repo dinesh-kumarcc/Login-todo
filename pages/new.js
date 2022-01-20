@@ -25,10 +25,10 @@ const NewNote = ({ notes }) => {
     const [logout, setLogout] = useState(false);
     const [freshRec, setFreshRec] = useState(false);
     const [searchValue, setSearchValue] = useState('');
-    // const [reco]
     const Record = [];
 
     useEffect(() => {
+        console.log(notes,'notes ++')
         const userId = localStorage.getItem('userId');
         if (!userId) {
             router.push("/");
@@ -36,21 +36,25 @@ const NewNote = ({ notes }) => {
         if (userId) {
             router.push("/new");
         }
-        getNote()
+        // getNote()
         const users = JSON.parse(localStorage.getItem('loginUserData'));
-        console.log(users, 'get users', togetNote)
+        console.log(users, 'get users')
         setLoginUser(users.email);
-        createNote();
-        if (togetNote) {
-            console.log(togetNote, '**??***', togetNote)
+        const userLogin = users.email;
+        console.log(userLogin,' check user login')
+        // createNote();
+        if (notes) {
+            console.log('**??***', notes)
 
-            for (let i = 0; i < togetNote.length; i++) {
-                console.log(togetNote[i].email, 'email togetNotessss')
-                if (togetNote[i].email === loginuser) {
-                    Record.push(togetNote[i])
+            for (let i = 0; i < notes.length; i++) {
+                console.log(notes[i].email, 'email notesssss',users.email)
+                if (notes[i].email === users.email) {
+                    console.log(' if loop')
+                    Record.push(notes[i])
                     console.log('record ////', Record, 'length', Record.length)
                     setUserRecord(Record)
                     setFreshRec(true)
+
                     // setUserRecord(Record)
                 }
             }
@@ -58,20 +62,17 @@ const NewNote = ({ notes }) => {
     }, [errors,logout,freshRec])
 
 
-    const getNote = async () => {
-        const res = await axios.get('http://localhost:3000/api/notes');
-        console.log(res.data.data, 'res')
-        setGetNote(res.data.data)
-    }
-    console.log(togetNote, 'togetnote')
+    // const getNote = async () => {
+    //     const res = await axios.get('http://localhost:3000/api/notes');
+    //     console.log(res.data.data, 'res')
+    //     setGetNote(res.data.data)
+    // }
+    // console.log(togetNote, 'togetnote')
 
-    console.log(loginuser, 'login user')
-    console.log(loginuser, 'login  ***** user', notes)
-    const title = loginuser;
-    // const [form, setForm] = useState({ title: title,email:loginuser});
-    console.log(form, ';;;form', loginuser.length);
+    // console.log(loginuser, 'login user')
+    // console.log(loginuser, 'login  ***** user', notes)
+    // console.log(form, ';;;form', loginuser.length);
 
-    // const [form, setForm] = useState({ title: '',email:'id' });
 
     const createNote = async () => {
         console.log(form.email, '??????', loginuser)
@@ -92,17 +93,7 @@ const NewNote = ({ notes }) => {
 
     }
 
-    const handleCheck = (event) => {
-        var updatedList = [...checked];
-        if (event.target.checked) {
-            updatedList = [...checked, event.target.value];
-        } else {
-            updatedList.splice(checked.indexOf(event.target.value), 1);
-        }
-        setChecked(updatedList);
-    };
-    var isChecked = (item) =>
-        checked.includes(item) ? "checked-item" : "not-checked-item";
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
