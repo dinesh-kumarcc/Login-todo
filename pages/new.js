@@ -36,7 +36,7 @@ const NewNote = ({ notes }) => {
         if (userId) {
             router.push("/new");
         }
-        getNote()
+        // getNote()
         const users = JSON.parse(localStorage.getItem('loginUserData'));
         console.log(users, 'get users', togetNote)
         setLoginUser(users.email);
@@ -207,7 +207,7 @@ const NewNote = ({ notes }) => {
 
                             return (
                                 <div key={note._id} style={{ textAlign: "center", paddingLeft: "40px", paddingRight: "40px" }}>
-                                    <input value={note.title} type="checkbox" onChange={handleCheck} />
+                                    {/* <input value={note.title} type="checkbox" onChange={handleCheck} /> */}
                                     <span onClick={crossLine}>{note.title}</span>
                                     {/* <span className={isChecked(note)}>{note.title}</span> */}
                                     <hr />
