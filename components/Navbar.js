@@ -9,7 +9,6 @@ import { useRouter } from 'next/router';
 const Navbar = () => {
 
     const router = useRouter();
-    const [uuserGet,setUserGet] = ['']
   
 
   useEffect(() => { 
@@ -23,13 +22,11 @@ const Navbar = () => {
         // setUserGet(localStorage.getItem('userId'))
   }, [])
 
-  function logoutUser() {
-    localStorage.removeItem("userId");
-  }
+//   function logoutUser() {
+//     localStorage.removeItem("userId");
+//   }
  
-//   const userGet = localStorage.getItem('userId');
-  
-//   onClick={closeModal}
+
   return (
     <nav className="navbar">
         {/* {
@@ -46,9 +43,9 @@ const Navbar = () => {
         <Link href="/register">
             <a className="create">Click to Regiser User</a>
         </Link>
-        <Link href="/new">
+        {/* <Link href="/new">
             <a className="create" onClick={logoutUser}>Logout</a>
-        </Link>
+        </Link> */}
     </nav>
   )
 }

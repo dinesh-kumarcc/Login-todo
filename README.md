@@ -156,4 +156,18 @@ export default Login;
     // }
 
 
+
+ {/* <div style={{ paddingTop: "40px" }}>
+                        {userRecord.map((note, index) => {
+                            // console.log(index,'note',note,'note')
+
+                            return (
+                                <div key={note._id} style={{ textAlign: "center", paddingLeft: "40px", paddingRight: "40px" }}>
+                                    <input value={note.title} type="checkbox" onChange={handleCheck} />
+                                    <span className={isChecked(note)}>{note.title}</span>
+                                    <hr />
+                                </div>
+                            )
+                        })}
+                    </div> */}
 -->

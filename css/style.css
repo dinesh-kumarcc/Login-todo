@@ -66,12 +66,17 @@ h1 {
     gap: 10px;
     margin-left: 20px;
   }
-  .checked-item,
+  /* .checked-item, */
   .not-checked-item {
     margin-left: 10px;
   }
   .checked-item {
     /* text-decoration: line-through; */
         text-decoration: line-through;
+        text-decoration: solid;
     color: #aaa;
   }
+
+  .crossed-line {
+    text-decoration: line-through;
+}

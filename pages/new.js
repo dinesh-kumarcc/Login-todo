@@ -20,71 +20,77 @@ const NewNote = ({ notes }) => {
     const [loginuser, setLoginUser] = useState('');
     const [userRecord, setUserRecord] = useState([]);
     const [togetNote, setGetNote] = useState([]);
+    const [addButton, setAddButton] = useState(false);
+    const [searchButton, setSearchButton] = useState(false);
+    const [logout, setLogout] = useState(false);
+    const [freshRec, setFreshRec] = useState(false);
+    const [searchValue, setSearchValue] = useState('');
     // const [reco]
     const Record = [];
 
     useEffect(() => {
         const userId = localStorage.getItem('userId');
-        if(!userId){
+        if (!userId) {
             router.push("/");
         }
-        if(userId){
+        if (userId) {
             router.push("/new");
         }
-        getNote() 
+        getNote()
         const users = JSON.parse(localStorage.getItem('loginUserData'));
-        console.log(users,'get users',togetNote)
+        console.log(users, 'get users', togetNote)
         setLoginUser(users.email);
         createNote();
-        if(togetNote){
-            console.log(togetNote,'**??***',togetNote)
+        if (togetNote) {
+            console.log(togetNote, '**??***', togetNote)
 
             for (let i = 0; i < togetNote.length; i++) {
-                console.log(togetNote[i].email,'email togetNotessss')    
+                console.log(togetNote[i].email, 'email togetNotessss')
                 if (togetNote[i].email === loginuser) {
                     Record.push(togetNote[i])
-                    console.log('record ////',Record,'length',Record.length)
+                    console.log('record ////', Record, 'length', Record.length)
                     setUserRecord(Record)
+                    setFreshRec(true)
                     // setUserRecord(Record)
                 }
             }
         }
-    }, [errors])
+    }, [errors,logout,freshRec])
 
 
     const getNote = async () => {
         const res = await axios.get('http://localhost:3000/api/notes');
-        console.log(res.data.data,'res')
+        console.log(res.data.data, 'res')
         setGetNote(res.data.data)
     }
-    console.log(togetNote,'togetnote')
+    console.log(togetNote, 'togetnote')
 
-    console.log(loginuser,'login user')
-    console.log(loginuser,'login  ***** user',notes)
+    console.log(loginuser, 'login user')
+    console.log(loginuser, 'login  ***** user', notes)
     const title = loginuser;
     // const [form, setForm] = useState({ title: title,email:loginuser});
-    console.log(form,';;;form',loginuser.length);
+    console.log(form, ';;;form', loginuser.length);
 
     // const [form, setForm] = useState({ title: '',email:'id' });
 
     const createNote = async () => {
-        console.log(form.email,'??????',loginuser)
+        console.log(form.email, '??????', loginuser)
         axios.post("http://localhost:3000/api/notes", {
-          title: form.title,
-          email: loginuser
+            title: form.title,
+            email: loginuser
         })
-        .then(function (response) {
-          console.log(response,'>>',response.data.data._id);
-          if(response.data.data){
+            .then(function (response) {
+                console.log(response, '>>', response.data.data._id);
+                if (response.data.data) {
 
-            setIsSubmitting(false);
-          }
-        })
-        .catch(function (error) {
-          console.log(error);   
-        });
-      
-      }
+                    setIsSubmitting(false);
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    }
 
     const handleCheck = (event) => {
         var updatedList = [...checked];
@@ -119,58 +125,105 @@ const NewNote = ({ notes }) => {
         if (!form.title) {
             err.title = 'Title is required';
         }
-        // if (!form.description) {
-        //     err.description = 'Description is required';
-        // }
 
         return err;
     }
 
-    console.log(userRecord.length,'user lebn')
+    function pulsButton() {
+        setAddButton(true)
+        setSearchButton(false)
+    }
+
+    function searchBut() {
+        setSearchButton(true)
+        setAddButton(false)
+    }
+
+    function logoutUser() {
+        localStorage.removeItem("userId");
+        setLogout(true)
+      }
+
+      function crossLine(event) {
+        const element = event.target;
+        element.classList.toggle("crossed-line");
+      }
+
+    console.log(userRecord.length, 'user lebn')
     return (
         <div className="form-container">
+             <Link href="/new">
+            <a className="create" onClick={logoutUser}>Logout</a>
+        </Link>
             <div style={{ height: "200px", width: "600px" }}>
                 <Card>
-                    <h3 style={{textAlign:'center',paddingTop:'8px'}}>THINGS TO DO</h3>
+                    <h3 style={{ textAlign: 'center', paddingTop: '8px' }}>THINGS TO DO</h3>
                     <div>
-                        {
+                        {/* <input onChange={event => setSearchValue(event.target.value)} value={searchValue} type="text" placeholder="Enter product name to search..." style={{ width: '50%', height: '40px', fontSize: '16px' }}></input> */}
+                        {/* {
                             isSubmitting
                                 ? <Loader active inline='centered' />
-                                : <Form onSubmit={handleSubmit}>
-                                    <Form.Input
+                                :  */}
+
+                        <Form onSubmit={handleSubmit}>
+                            {addButton ? (<>
+                                <Form.Input
+                                    fluid
+                                    error={errors.title ? { content: 'Please enter a title', pointing: 'below' } : null}
+                                    label=''
+                                    placeholder='Title'
+                                    name='title'
+                                    onChange={handleChange}
+                                />
+                            </>) : ""}
+                            {searchButton ? (<>
+                                <Form.Input
+                                    fluid
+                                    error={errors.title ? { content: 'Please enter a title', pointing: 'below' } : null}
+                                    label=''
+                                    placeholder='Search '
+                                    // name='title'
+                                    value={searchValue}
+                                    onChange={event => setSearchValue(event.target.value)} value={searchValue}
+                                />
+                            </>) : ""}
+                            {/* <Form.Input
                                         fluid
                                         error={errors.title ? { content: 'Please enter a title', pointing: 'below' } : null}
                                         label=''
                                         placeholder='Title'
                                         name='title'
                                         onChange={handleChange}
-                                    />
-                                    {/* <Button type='submit'></Button> */}
-                                    {/* <Button type='submit'> <FontAwesomeIcon className="button11" icon={faPlus} /></Button> */}
-                                </Form>
-                        }
+                                    /> */}
+                            {/* <Button type='submit'></Button> */}
+                            {/* <Button type='submit'> <FontAwesomeIcon className="button11" icon={faPlus} /></Button> */}
+                        </Form>
+                        {/* } */}
                     </div>
                     <div style={{ paddingTop: "40px" }}>
-                        {userRecord.map((note, index) => {
-                            // console.log(index,'note',note,'note')
+                        {userRecord.filter(product => {
+                            if (!searchValue) { return true } else return product.title.toLowerCase().includes(searchValue.toLowerCase())
+                        }).map((note, index) => {
 
                             return (
                                 <div key={note._id} style={{ textAlign: "center", paddingLeft: "40px", paddingRight: "40px" }}>
                                     <input value={note.title} type="checkbox" onChange={handleCheck} />
-                                    <span className={isChecked(note)}>{note.title}</span>
+                                    <span onClick={crossLine}>{note.title}</span>
+                                    {/* <span className={isChecked(note)}>{note.title}</span> */}
                                     <hr />
                                 </div>
                             )
                         })}
                     </div>
-                    <div style={{backgroundColor:'#F4FCE8'}}>
-                    <Button style={{backgroundColor:'#F4FCE8',fontSize:'10px'}}> <FontAwesomeIcon className="button11" icon={faPlus} /></Button>
-                    <Button style={{backgroundColor:'#F4FCE8',paddingLeft:'1px',fontSize:'10px'}}> <FontAwesomeIcon className="button11" icon={faSearch} /></Button>
-                    <Button style={{backgroundColor:'#F4FCE8',paddingLeft:'1px',fontSize:'10px'}}> <FontAwesomeIcon className="button11" icon={faGripLinesVertical} /></Button>
-                    <span style={{backgroundColor:'#F4FCE8',paddingLeft:'9px',fontSize:'10px'}}>{userRecord.length} items Left</span>
-                    <Button style={{backgroundColor:'#F4FCE8',paddingLeft:'250px',fontSize:'10px'}}>All</Button>
-                    <Button style={{backgroundColor:'#F4FCE8',paddingLeft:'2px',fontSize:'10px'}}>Active</Button>
-                    <Button style={{backgroundColor:'#F4FCE8',paddingLeft:'2px',fontSize:'10px'}}>Completed</Button>
+                   
+                    <div style={{ backgroundColor: '#F4FCE8' }}>
+                        <Button style={{ backgroundColor: '#F4FCE8', fontSize: '10px' }} onClick={pulsButton}> <FontAwesomeIcon className="button11" icon={faPlus} /></Button>
+                        <Button style={{ backgroundColor: '#F4FCE8', paddingLeft: '1px', fontSize: '10px'  }} onClick={searchBut}> <FontAwesomeIcon className="button11" icon={faSearch} /></Button>
+                        <Button style={{ backgroundColor: '#F4FCE8', paddingLeft: '1px', fontSize: '10px' }}> <FontAwesomeIcon className="button11" icon={faGripLinesVertical} /></Button>
+                        <span style={{ backgroundColor: '#F4FCE8', paddingLeft: '9px', fontSize: '10px' }}>{userRecord.length} items Left</span>
+                        <Button style={{ backgroundColor: '#F4FCE8', paddingLeft: '250px', fontSize: '10px' }}>All</Button>
+                        <Button style={{ backgroundColor: '#F4FCE8', paddingLeft: '2px', fontSize: '10px' }}>Active</Button>
+                        <Button style={{ backgroundColor: '#F4FCE8', paddingLeft: '2px', fontSize: '10px' }}>Completed</Button>
 
                     </div>
                     {/* <Button type='submit'> <FontAwesomeIcon className="button11" icon={faPlus} /></Button> */}
@@ -185,7 +238,7 @@ const NewNote = ({ notes }) => {
 NewNote.getInitialProps = async () => {
     const res = await fetch('http://localhost:3000/api/notes');
     const { data } = await res.json();
-    console.log(data,'getInitialProps')
+    console.log(data, 'getInitialProps')
 
     return { notes: data }
 }
