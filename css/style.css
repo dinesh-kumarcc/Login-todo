@@ -70,8 +70,8 @@ h1 {
   .not-checked-item {
     margin-left: 10px;
   }
-  .checked {
+  .checked-item {
     /* text-decoration: line-through; */
-    text-decoration: line-through;
+        text-decoration: line-through;
     color: #aaa;
   }
