@@ -18,7 +18,7 @@ h1 {
 }
 
 .navbar .create {
-    color: rgb(15, 15, 15);
+    color: rgb(23, 41, 197);
     font-size: 1.5rem;
 }
 
@@ -80,3 +80,7 @@ h1 {
   .crossed-line {
     text-decoration: line-through;
 }
+
+
+/* 
+"homepage": "https://task-code-corner-todo-login.herokuapp.com/", */

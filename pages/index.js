@@ -39,7 +39,7 @@ const Index = () => {
       password: form.password
     })
     .then(function (response) {
-      console.log(response,'>>',response.data.data._id);
+      // console.log(response,'>>',response.data.data._id);
       localStorage.setItem('userId',response.data.data._id)
       localStorage.setItem('loginUserData',JSON.stringify(response.data.data))
       router.push("/new");

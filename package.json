@@ -1,6 +1,5 @@
 {
   "name": "notes-app",
-  "homepage": "https://task-code-corner-todo-login.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "scripts": {

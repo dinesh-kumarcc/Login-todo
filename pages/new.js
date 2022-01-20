@@ -36,7 +36,7 @@ const NewNote = ({ notes }) => {
         if (userId) {
             router.push("/new");
         }
-        // getNote()
+        getNote()
         const users = JSON.parse(localStorage.getItem('loginUserData'));
         console.log(users, 'get users', togetNote)
         setLoginUser(users.email);
