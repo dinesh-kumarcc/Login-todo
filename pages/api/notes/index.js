@@ -6,6 +6,7 @@ dbConnect();
 export default async (req, res) => {
     console.log(req.body,'>>>>>>>>>>>>')
     const { method } = req;
+    // const {id} = req.body
 
     switch (method) {
         case 'GET':
@@ -32,7 +33,7 @@ export default async (req, res) => {
         //     try {
         //         const note = await Note.create(req.body);
 
-        //         res.status(201).json({ success: true, data: note })
+        //         res.status(201).json({ success: true, data:  note })
         //     } catch (error) {
         //         res.status(400).json({ success: false });
         //     }

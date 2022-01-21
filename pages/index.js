@@ -1,7 +1,5 @@
-import Link from 'next/link';
-import fetch from 'isomorphic-unfetch';
 import { useState, useEffect } from 'react';
-import { Button, Card, Form, Checkbox } from 'semantic-ui-react';
+import { Button, Form } from 'semantic-ui-react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
@@ -11,7 +9,6 @@ import axios from 'axios';
 // https://contactmentor.com/checkbox-list-react-js-example/
 const Index = () => {
   const [form, setForm] = useState({email: '', password: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
   const router = useRouter();
 
@@ -23,17 +20,17 @@ const Index = () => {
     if(!userId){
       router.push("/");
     }
-    if (isSubmitting) {
-      if (Object.keys(errors).length === 0) {
-        createUser();
-      }
-      else {
-        setIsSubmitting(false);
-      }
-    }
+    // if (isSubmitting) {
+    //   if (Object.keys(errors).length === 0) {
+    //     loginUser();
+    //   }
+    //   else {
+    //     setIsSubmitting(false);
+    //   }
+    // }
   }, [errors])
  
-  const createUser = async () => {
+  const loginUser = async () => {
     axios.post("http://localhost:3000/api/login", {
       email: form.email,
       password: form.password
@@ -71,7 +68,8 @@ const Index = () => {
     e.preventDefault();
     let errs = validate();
     setErrors(errs);
-    setIsSubmitting(true);
+    loginUser();
+    // setIsSubmitting(true);
   }
 
   return (
@@ -140,7 +138,7 @@ export default Index;
 //   useEffect(() => {
 //     if (isSubmitting) {
 //       if (Object.keys(errors).length === 0) {
-//         createUser();
+//         loginUser();
 //       }
 //       else {
 //         setIsSubmitting(false);
@@ -148,7 +146,7 @@ export default Index;
 //     }
 //   }, [errors])
 
-//   const createUser = async () => {
+//   const loginUser = async () => {
 //     try {
 //       const res = await fetch('http://localhost:3000/api/login', {
 //         method: 'POST',
