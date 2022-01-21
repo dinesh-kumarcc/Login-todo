@@ -90,7 +90,6 @@ const NewNote = ({ notes }) => {
             .catch(function (error) {
                 console.log(error);
             });
-
     }
 
 
