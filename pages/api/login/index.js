@@ -20,12 +20,14 @@ export default async (req, res) => {
                 // }
 
                 if(req.body.email == note.email && req.body.password == note.password){
-                    res.status(200).json({ success: true ,data:note});
+                    res.status(200).json({ success: 200 ,data:note});
                 }else{
-                    res.status(400).json({ success: true ,message:"email password doesnot match"});
+                    console.log('++++++++++++++==')
+                    res.status(400).json({ success: 400 ,message:"email password doesnot match"});
                 }
             } catch (error) {
-                res.status(400).json({ success: false });
+                console.log('===========')
+                res.status(400).json({ success: 400 });
             }
             break;  
       

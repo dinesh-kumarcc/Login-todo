@@ -12,19 +12,18 @@ const Index = () => {
   const router = useRouter();
   
   useEffect(() => {
-    if (isSubmitting) {
-        if (Object.keys(errors).length === 0) {
-          createUser();
-        }
-        else {
-            setIsSubmitting(false);
-        }
-    }
+    // const userId = localStorage.getItem('userId');
+    // if (!userId) {
+    //     router.push("/");
+    // }
+    // // if (userId) {
+    // //     router.push("/new");
+    // // }
 }, [errors])
 
 const createUser = async () => {
   try {
-      const res = await fetch('http://localhost:3000/api/register', {
+      const res = await fetch('/api/register', {
           method: 'POST',
           headers: {
               "Accept": "application/json",
@@ -32,8 +31,17 @@ const createUser = async () => {
           },
           body: JSON.stringify(form)
       })
+      const data = await res.json();
+      console.log(data,'register data')
       console.log(form,'form')
-      router.push("/new");
+      if(data.success == 201){
+        alert('Register Successfully')
+        router.push("/");
+      }
+      if(data.success == 400){
+        alert('Already Register')
+        // router.push("/");
+      }
   } catch (error) {
       console.log(error);
   }
@@ -70,6 +78,7 @@ const handleSubmit = (e) => {
   e.preventDefault();
   let errs = validate();
   setErrors(errs);
+  createUser();
   setIsSubmitting(true);
 }
 
@@ -111,3 +120,26 @@ const handleSubmit = (e) => {
 }
 
 export default Index;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ // if (isSubmitting) {
+    //     if (Object.keys(errors).length === 0) {
+    //       createUser();
+    //     }
+    //     else {
+    //         setIsSubmitting(false);
+    //     }
+    // }

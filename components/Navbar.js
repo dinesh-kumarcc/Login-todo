@@ -20,29 +20,16 @@ const Navbar = () => {
         // setUserGet(localStorage.getItem('userId'))
   }, [])
 
-//   function logoutUser() {
-//     localStorage.removeItem("userId");
-//   }
- 
 
   return (
     <nav className="navbar">
-        {/* {
-            userGet ? (<>
-            <Link href="/new">
-            <a className="create" onClick={logoutUser}>Logout</a>
-        </Link>
-            </>) : (<>
-                <Link href="/register">
-            <a className="create">Click to Regiser User</a>
-        </Link>
-            </>)
-        } */}
+        {/* {!localStorage.getItem('userId') ? (<> */}
         <Link href="/register">
-            <a className="create">Click to Regiser User</a>
+            <a className="create">Click to Regiser New User</a>
         </Link>
-        {/* <Link href="/new">
-            <a className="create" onClick={logoutUser}>Logout</a>
+        {/* </>):""} */}
+        {/* <Link href="/login">
+            <a className="create">Login</a>
         </Link> */}
     </nav>
   )

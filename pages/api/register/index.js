@@ -33,10 +33,10 @@ export default async (req, res) => {
                    
                     const resgiter = await Register.create(req.body);
     
-                    res.status(201).json({ success: true, data: resgiter })
+                    res.status(201).json({ success: 201, data: resgiter })
                 }else{
                     console.log('%%%%%%%%%%%%%%')
-                    res.status(400).json({ success: true ,message:"email password exist"});
+                    res.status(400).json({ success: 400 ,message:"email password exist"});
                    
                 }
 

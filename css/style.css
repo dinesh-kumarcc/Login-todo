@@ -81,6 +81,17 @@ h1 {
     text-decoration: line-through;
 }
 
+.listText{
+    min-height: 20px;
+    padding-left: 25px;
+    margin-bottom: 0;
+    font-weight: normal;
+    cursor: pointer;
+}
+.hr{
+    padding-left: 40px;
+}
+
 
 /* 
 "homepage": "https://task-code-corner-todo-login.herokuapp.com/", */

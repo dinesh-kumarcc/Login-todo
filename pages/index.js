@@ -31,17 +31,21 @@ const Index = () => {
   }, [errors])
  
   const loginUser = async () => {
-    axios.post("http://localhost:3000/api/login", {
+    axios.post("/api/login", {
       email: form.email,
       password: form.password
     })
     .then(function (response) {
-      // console.log(response,'>>',response.data.data._id);
-      localStorage.setItem('userId',response.data.data._id)
-      localStorage.setItem('loginUserData',JSON.stringify(response.data.data))
-      router.push("/new");
+      console.log(response,'>>',response.data.success);
+      if(response.data.success == 200){
+        alert('Login Successfully')
+        localStorage.setItem('userId',response.data.data._id)
+        localStorage.setItem('loginUserData',JSON.stringify(response.data.data))
+        router.push("/new");
+      }
     })
     .catch(function (error) {
+      alert('Email Password Doesnot Match')
       console.log(error);   
     });
   
@@ -91,6 +95,7 @@ const Index = () => {
             label='Password'
             placeholder='Password'
             name='password'
+            type="password"
             error={errors.password ? { content: 'Please enter a password', pointing: 'below' } : null}
             onChange={handleChange}
           />

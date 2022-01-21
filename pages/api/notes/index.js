@@ -4,9 +4,9 @@ import Note from '../../../models/Note';
 dbConnect();
 
 export default async (req, res) => {
-    console.log(req.body,'>>>>>>>>>>>>')
+    console.log(req.body,'>>>>>>>>>>>>',req)
     const { method } = req;
-    // const {id} = req.body
+    // const {id} = req.body.query
 
     switch (method) {
         case 'GET':
@@ -15,7 +15,7 @@ export default async (req, res) => {
 
                 res.status(200).json({ success: true, data: notes })
             } catch (error) {
-                res.status(400).json({ success: false });
+                // res.status(400).json({ success: false });
             }
             break;
         case 'POST':
