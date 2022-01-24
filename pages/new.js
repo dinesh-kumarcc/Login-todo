@@ -23,7 +23,6 @@ const NewNote = () => {
     const [allnotes, setAllNotes] = useState(true);
     const [toggleAllComplete, settoggleAllComplete] = useState(false)
     const [toggleAllActive, settoggleAllActive] = useState(false)
-    const [crossline, setCrossLine] = useState(false)
     const [finalComplete, setFinalComplete] = useState([]);
     const [activeNotes, setActiveNotes] = useState([]);
     const Comple = [];
@@ -51,27 +50,26 @@ const NewNote = () => {
         const data = JSON.parse(localStorage.getItem('loginUserData'));
         if (data) {
             const dataEmail = data.email
-            axios.get(`http://localhost:3000/api/notes/${dataEmail}`)
+            axios.get(`/api/notes/${dataEmail}`)
                 .then(function (response) {
                     console.log(response.data.data, 'get new function');
                     setGetNotesData(response.data.data)
                     const notesData = response.data.data;
-                    console.log(notesData,'????')
-                    if(notesData){
+                    console.log(notesData, '????')
+                    if (notesData) {
                         for (let i = 0; i < notesData.length; i++) {
-                            console.log(notesData[i].complete,'complete')
-                            if(notesData[i].complete == true){
+                            console.log(notesData[i].complete, 'complete')
+                            if (notesData[i].complete == true) {
                                 Comple.push(notesData[i]);
-                                console.log(Comple,'*******')
+                                console.log(Comple, '*******')
                                 setFinalComplete(Comple)
                             }
-                
                         }
                         for (let i = 0; i < notesData.length; i++) {
-                            console.log(notesData[i].complete,'complete')
-                            if(notesData[i].complete == false){
+                            console.log(notesData[i].complete, 'complete')
+                            if (notesData[i].complete == false) {
                                 Active.push(notesData[i]);
-                                console.log(Comple,'*******')
+                                console.log(Comple, '*******')
                                 setActiveNotes(Active)
                             }
                         }
@@ -146,16 +144,16 @@ const NewNote = () => {
 
     function toggleComplete(id) {
         console.log('target', id)
-        if(completeNote == true){
+        if (completeNote == true) {
             setCompleteNotes(false)
-            console.log(completeNote,'false complete notes')
+            console.log(completeNote, 'false complete notes')
         }
-        if(completeNote == false){
+        if (completeNote == false) {
             setCompleteNotes(true)
-            console.log(completeNote,'true complete notes')
+            console.log(completeNote, 'true complete notes')
         }
 
-        axios.put(`http://localhost:3000/api/notes/${id}`, {
+        axios.put(`/api/notes/${id}`, {
             complete: completeNote
         })
             .then(function (response) {
@@ -185,7 +183,7 @@ const NewNote = () => {
             .catch(function (error) {
                 console.log(error);
             });
-        
+
         // const completed = getNoteData.map(todo => {
         //     // console.log(todo,'todo map',todo._id)
         //     if (todo._id === id) {
@@ -204,7 +202,7 @@ const NewNote = () => {
         setAllNotes(false)
 
     }
-    
+
 
     function showAll() {
         settoggleAllComplete(false)
@@ -261,18 +259,12 @@ const NewNote = () => {
 
                                 return (
                                     <div key={note._id} style={{ paddingLeft: "40px", paddingRight: "40px" }}>
-                                            <span
+                                        <span
                                             style={{
                                                 textDecoration: note.complete == true ? "line-through" : ""
-                                              }}
+                                            }}
                                             onClick={() => toggleComplete(note._id)} className='listText'>{note.title}</span>
                                         <hr />
-                                        {/* <span
-                                            // style={{
-                                            //     textDecoration: crossLine ? "line-through" : ""
-                                            //   }}
-                                            onClick={() => toggleComplete(note._id)} className='listText'>{note.title}</span>
-                                        <hr /> */}
                                     </div>
                                 )
                             })}
@@ -288,6 +280,9 @@ const NewNote = () => {
                                 return (
                                     <div key={note._id} style={{ paddingLeft: "40px", paddingRight: "40px" }}>
                                         <span
+                                            style={{
+                                                textDecoration: note.complete == true ? "line-through" : ""
+                                            }}
                                             onClick={() => toggleComplete(note._id)} className='listText'>{note.title}</span>
                                         <hr />
                                     </div>
@@ -317,14 +312,14 @@ const NewNote = () => {
                         <Button style={{ backgroundColor: '#F4FCE8', fontSize: '10px' }} onClick={pulsButton}> <FontAwesomeIcon className="button11" icon={faPlus} /></Button>
                         <Button style={{ backgroundColor: '#F4FCE8', paddingLeft: '1px', fontSize: '10px' }} onClick={searchBut}> <FontAwesomeIcon className="button11" icon={faSearch} /></Button>
                         <Button style={{ backgroundColor: '#F4FCE8', paddingLeft: '1px', fontSize: '10px' }}> <FontAwesomeIcon className="button11" icon={faGripLinesVertical} /></Button>
-                        {allnotes ?(<>
-                        <span style={{ backgroundColor: '#F4FCE8', paddingLeft: '9px', fontSize: '10px' }}>{getNoteData.length} items Left</span>
+                        {allnotes ? (<>
+                            <span style={{ backgroundColor: '#F4FCE8', paddingLeft: '9px', fontSize: '10px' }}>{getNoteData.length} Items Left</span>
                         </>) : ""}
-                        {toggleAllActive ?(<>
-                        <span style={{ backgroundColor: '#F4FCE8', paddingLeft: '9px', fontSize: '10px' }}>{activeNotes.length} items Left</span>
+                        {toggleAllActive ? (<>
+                            <span style={{ backgroundColor: '#F4FCE8', paddingLeft: '9px', fontSize: '10px' }}>{activeNotes.length} Items Left</span>
                         </>) : ""}
-                        {toggleAllComplete ?(<>
-                        <span style={{ backgroundColor: '#F4FCE8', paddingLeft: '9px', fontSize: '10px' }}>{finalComplete.length} items Left</span>
+                        {toggleAllComplete ? (<>
+                            <span style={{ backgroundColor: '#F4FCE8', paddingLeft: '9px', fontSize: '10px' }}>{finalComplete.length} Items Left</span>
                         </>) : ""}
                         <Button style={{ backgroundColor: '#F4FCE8', paddingLeft: '250px', fontSize: '10px' }} onClick={showAll}>All</Button>
                         <Button style={{ backgroundColor: '#F4FCE8', paddingLeft: '2px', fontSize: '10px' }} onClick={showActive}>Active</Button>
