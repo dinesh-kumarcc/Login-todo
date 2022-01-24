@@ -20,7 +20,7 @@ export default async (req, res) => {
             break;
         case 'POST':
             try {
-                console.log(req.body,'>>>>>>>>>')
+                console.log('<<<<<<<<<<',req.body,'>>>>>>>>>')
                 const note = await Note.create(req.body);
                 console.log(note,'>>//////////>>>')
 

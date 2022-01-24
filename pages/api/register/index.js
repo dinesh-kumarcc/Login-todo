@@ -37,7 +37,6 @@ export default async (req, res) => {
                 }else{
                     console.log('%%%%%%%%%%%%%%')
                     res.status(400).json({ success: 400 ,message:"email password exist"});
-                   
                 }
 
                 
