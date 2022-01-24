@@ -335,6 +335,7 @@ const NewNote = () => {
 //     return { notes: data }
 // }
 
+
 export default NewNote;
 
 
@@ -366,7 +367,7 @@ export default NewNote;
     // }
 
 
-    
+
 
 
     // function toggleComplete(id) {
