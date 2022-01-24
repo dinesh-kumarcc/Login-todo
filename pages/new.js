@@ -57,10 +57,9 @@ const NewNote = () => {
                     console.log(notesData, '????')
                     if (notesData) {
                         for (let i = 0; i < notesData.length; i++) {
-                            console.log(notesData[i].complete, 'complete')
                             if (notesData[i].complete == true) {
                                 Comple.push(notesData[i]);
-                                console.log(Comple, '*******')
+                                console.log(Comple, '***complete***')
                                 setFinalComplete(Comple)
                             }
                         }
@@ -68,7 +67,7 @@ const NewNote = () => {
                             console.log(notesData[i].complete, 'complete')
                             if (notesData[i].complete == false) {
                                 Active.push(notesData[i]);
-                                console.log(Comple, '*******')
+                                console.log(Comple, '****Active***')
                                 setActiveNotes(Active)
                             }
                         }
@@ -199,9 +198,7 @@ const NewNote = () => {
         settoggleAllComplete(true)
         settoggleAllActive(false)
         setAllNotes(false)
-
     }
-
 
     function showAll() {
         settoggleAllComplete(false)
@@ -209,14 +206,11 @@ const NewNote = () => {
         setAllNotes(true)
     }
 
-
     function showActive() {
         settoggleAllActive(true)
         settoggleAllComplete(false)
         setAllNotes(false)
     }
-
-
 
     return (
         <div className="form-container">

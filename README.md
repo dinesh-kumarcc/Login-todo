@@ -76,6 +76,15 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
         console.log(duplicateID, 'duplicate')
         // console.log(toggleAllComplete, 'completed',complete,'duplicate')
     };
+
+
+
+    https://contactmentor.com/checkbox-list-react-js-example/
+
+    todo on strike complete line https://codesandbox.io/s/todo-list-hooks-ebfgw?from-embed=&file=/src/ToDoList.js
+
+    Javascript: How to access the return value of a Promise object
+
  -->
 
 
