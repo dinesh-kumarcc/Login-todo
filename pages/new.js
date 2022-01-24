@@ -42,7 +42,6 @@ const NewNote = () => {
         if (users) {
             setLoginUser(users.email);
         }
-
     }, [errors, logout])
 
     const getNote = async () => {
