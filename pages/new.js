@@ -366,4 +366,50 @@ export default NewNote;
     // }
 
 
+    
+
+
+    // function toggleComplete(id) {
+    //     console.log('target', id)
+    //     if (complete) {
+    //         //     var index = complete.findIndex(function(o){
+    //         //         return o._id === id;
+    //         //    })
+    //         //    console.log(index,'index exam')
+    //         //    if (index !== -1) {
+
+    //         //    const newArr = complete.splice(index, 1);
+    //         //    console.log(newArr,'newArr',complete)
+    //         //    setComplete(newArr)
+    //         //    }
+    //         const duplicatedata = complete.map(to => {
+    //             console.log(to, 'to')
+    //             if (to._id === id) {
+    //                 console.log('id match', id)
+    //                 setDuplicateId(id)
+    //             }
+    //         });
+    //     }
+    //     const completed = getNoteData.map(todo => {
+    //         // console.log(todo,'todo map',todo._id)
+    //         if (todo._id === id) {
+    //             setComplete([...complete, todo])
+    //             setCrossLine(true)
+    //         } else {
+    //             return todo;
+    //         }
+    //     })
+    //     console.log(duplicateID, 'duplicate')
+    //     // console.log(toggleAllComplete, 'completed',complete,'duplicate')
+    // };
+
+
+
+    // https://contactmentor.com/checkbox-list-react-js-example/
+
+    // todo on strike complete line https://codesandbox.io/s/todo-list-hooks-ebfgw?from-embed=&file=/src/ToDoList.js
+
+    // Javascript: How to access the return value of a Promise object
+
+
 
